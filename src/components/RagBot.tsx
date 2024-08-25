@@ -43,7 +43,7 @@ export default function Chat() {
         <input
           className="relative sm:w-[200rem] w-[50rem] max-w-lg p-3 mb-8 border border-gray-300 rounded-xl shadow-xl mt-6 "
           value={input}
-          placeholder="Ask anything ... Then teach everything ....."
+          placeholder="Enter URL ....."
           onChange={handleInputChange}
         />
       </form>
