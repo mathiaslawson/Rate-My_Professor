@@ -5,6 +5,7 @@ import Chat from "~/components/RagBot";
 import LandingPage from "./(main)/LandingPage";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { FloatDock } from "./_components/FloatDock";
+import ProfessorBot from "~/components/ProfessorsBot";
 
 
 export default async function Home() {
@@ -23,8 +24,13 @@ export default async function Home() {
       {userId ?
       (
           <main className="flex min-h-screen flex-col items-center justify-center  text-black">
-          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+            <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+              <h5>URL BOT AND MASS DATA BOT</h5>
               <Chat /> 
+
+              
+              <h5>Professor Bot</h5>
+               <ProfessorBot /> 
               
               <div className="absolute bottom-10">
                  <FloatDock />

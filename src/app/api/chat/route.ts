@@ -52,15 +52,26 @@ async function scrapeContent(url: string | undefined = ''): Promise<string> {
 
 // POST Request: Handle messages and use Google Generative AI
 export async function POST(req: Request) {
-  const { messages, link }: { messages: MessageType[]; link: string } = await req.json();
+ const { messages } = await req.json() as { messages: MessageType[] };
 
   let scrapedContent = '';
 
-
-  if (messages[messages.length - 1]?.content) {
+  function isValidUrl(string: string | undefined) {
+    try {
+      if (string) {
+        new URL(string);
+        return true;
+      }
+      return false;
+    } catch (_) {
+      return false;  
+    }
+  }
+    
+  if (messages[messages.length - 1]?.content && isValidUrl(messages[messages.length - 1]?.content)) {
     try {
       scrapedContent = await scrapeContent(messages[messages.length - 1]?.content);
-      console.log('Scraped content:', scrapedContent);
+      
       messages.push({
         role: "user",
         content: scrapedContent
@@ -68,22 +79,26 @@ export async function POST(req: Request) {
     } catch (error) {
       return NextResponse.json({ error: 'Failed to scrape the provided link' }, { status: 500 });
     }
+  } else {
+    scrapedContent = messages[messages.length - 1]?.content || '';
   }
 
   const google = createGoogleGenerativeAI({
     apiKey: process.env.GEMINI_API_KEY,
   });
 
+
+
   const result = await streamText({
     model: google("models/gemini-1.5-flash-latest"),
     system: `You are a helpful assistant. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
     if no relevant information is found in the tool calls, respond, "Sorry, I don't know."`,
-    messages: convertToCoreMessages(messages),
+    messages: convertToCoreMessages([{role: "user", content: scrapedContent}]),
     tools: {
       addResource: tool({
         description: `Add a resource to your knowledge base.
-    If the user provides a random piece of knowledge unprompted, use this tool without asking for confirmation.`,
+    If the user provides a random piece of knowledge unprompted, use this tool without asking for confirmation. After that organize that information into professors, thier ratings, and the schools thee work at`,
         parameters: z.object({
           content: z
             .string()
@@ -100,14 +115,12 @@ export async function POST(req: Request) {
               // console.log(res, 'from within');
             })) ??
             (await generateEmbedding(content));
-
+  
           return createResource({ content, embedding: embeddingValue } as { content: string; embedding?: string });
         },
       }),
     },
   });
-
-  console.log("result", result.toDataStreamResponse());
 
   return result.toDataStreamResponse();
 }

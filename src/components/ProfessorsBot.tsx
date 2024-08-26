@@ -4,7 +4,7 @@ import { useChat } from 'ai/react';
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { cn } from "~/lib/utils";
 
-export default function Chat() {
+export default function ProfessorBot() {
  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
    maxToolRoundtrips: 2,
    api: '/api/professors'
