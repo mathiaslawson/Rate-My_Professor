@@ -4,6 +4,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { NextApiResponse } from "next";
 import { auth } from "@clerk/nextjs/server";
 import { findRelevantContent } from "~/lib/ai/embedding"; // Adjust the import path as needed
+import { desc } from "drizzle-orm";
 
 type CoreMessage = {
   role: "user" | "assistant" | "system";
@@ -22,27 +23,35 @@ export async function POST(req: Request, res: NextApiResponse) {
     apiKey: process.env.GEMINI_API_KEY,
   });
 
+  const content = ''
+
   const userPrompt = messages[messages.length - 1]?.content ?? "all professors";
-  const relevantContent = await findRelevantContent(userPrompt).then(r => r.map(c => console.log(c.name)));
+  const relevantContent = await findRelevantContent(userPrompt).then(r => r);
 
   // console.log(JSON.stringify(relevantContent.map(c => c.name)))
 
-  // const result = await generateObject({
-  //   model: google("models/gemini-1.5-flash-latest"),
-  //   system: `You are a helpful assistant that provides information about professors based on the user's input. Use the following relevant content to answer what the user is prompting: ${JSON.stringify(relevantContent.map(c => c.name))}.  if no relevant information is found in the tool calls, respond, "Sorry, I don't know.`,
-  //   messages,
-  //   schema: z.object({
-  //     professors: z.array(
-  //       z.object({
-  //         name: z.string().describe("The name of the professor."),
-  //         course: z.string().optional().describe("The course taught by the professor, if known."),
-  //           school: z.string().optional().describe("The school of the professor, if known."),
-  //         rating: z.number().optional().describe("The rating of the professor out of 5, if available."),
-  //       })
-  //     ),
-  //   }),
-  // });
+  const result = await generateObject({
+    model: google("models/gemini-1.5-flash-latest"),
+    system: `You are a helpful assistant that  finds the rating of professors out of 10 from the following info, ${JSON.stringify(relevantContent.map(c => c.name))}.  if no relevant information is found in the tool calls, respond, "Sorry, I don't know.`,
+    messages: [{
+      role: "user",
+      content: JSON.stringify(relevantContent),
+    }],
+    schema: z.object({
+      professors: z.array(
+        z.object({
+          name: z.string().describe("The name of the professor."),
+          course: z.string().optional().describe("The course taught by the professor, if known."),
+          school: z.string().optional().describe("The school of the professor, if known."),
+          description: z.string().optional().describe("The description of the professor, if known."),
+          rating: z.number().optional().describe("The rating of the professor out of 10, based on how they are talked about on thier course"),
+        })
+      ),
+    }),
+  });
 
-  // console.log(result.object.professors);
-  return Response.json(relevantContent);
+  console.log(result.object.professors);
+
+  
+  return Response.json(result.object.professors)
 }

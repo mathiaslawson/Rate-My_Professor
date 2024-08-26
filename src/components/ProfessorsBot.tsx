@@ -1,13 +1,44 @@
 'use client';
 
 import { useChat } from 'ai/react';
+import { useState } from 'react';
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { cn } from "~/lib/utils";
 
 export default function ProfessorBot() {
+
+  interface Card {
+    name: string;
+    course: string;
+    school: string;
+    description: string; 
+    rating: number;
+  }
+
+  interface Professors {
+    professors?: Card[];
+  }
+
+  const [professors, setProfessors] = useState<Card[]>([]);
+
  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
    maxToolRoundtrips: 2,
-   api: '/api/professors'
+   api: '/api/professors', 
+   onResponse: async (response) => {
+
+     if (response.ok) {
+        try {
+          const data: unknown = await response.json(); 
+          setProfessors(data as Card[]);
+          console.log('Received data:', data);
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
+      } else {
+        console.error('Error with response:', response.statusText);
+      }
+    
+    }
  });
   
   
