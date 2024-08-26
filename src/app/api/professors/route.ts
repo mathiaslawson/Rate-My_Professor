@@ -16,7 +16,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const { messages }: { messages: CoreMessage[] } = await req.json();
+  const { messages }: { messages: CoreMessage[] } = await req.json() as { messages: CoreMessage[] };
 
   const google = createGoogleGenerativeAI({
     apiKey: process.env.GEMINI_API_KEY,

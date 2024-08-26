@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Failed to scrape the provided link' }, { status: 500 });
     }
   } else {
-    scrapedContent = messages[messages.length - 1]?.content || '';
+    scrapedContent = messages[messages.length - 1]?.content ?? '';
   }
 
   const google = createGoogleGenerativeAI({
