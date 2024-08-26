@@ -7,7 +7,7 @@ import { cn } from "~/lib/utils";
 export default function Chat() {
  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
    maxToolRoundtrips: 2,
-   api: '/api/professors'
+  //  api: '/api/professors'
  });
   
   
