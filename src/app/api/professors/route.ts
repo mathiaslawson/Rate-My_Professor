@@ -44,6 +44,7 @@ export async function POST(req: Request, res: NextApiResponse) {
           course: z.string().optional().describe("The course taught by the professor, if known."),
           school: z.string().optional().describe("The school of the professor, if known."),
           description: z.string().optional().describe("The description of the professor, if known."),
+          // similarities: z.number().optional().describe("The simimarities of the professor to the provided content"),
           rating: z.number().optional().describe("The rating of the professor out of 10, based on how they are talked about on thier course"),
         })
       ),

@@ -15,7 +15,8 @@ export default function Chat() {
   
   return (
     
-    <div className="">
+    <div className='flex justify-between'>
+        <div className="">
 
     
 
@@ -55,6 +56,9 @@ export default function Chat() {
       </form>
 
      
-    </div>
+      </div>
+      
+    
+  </div>
   );
 }
