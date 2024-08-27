@@ -10,15 +10,12 @@ function LandingPage() {
       
 
 
-          <div className='sm:col-span-8 col-span-12'>
+          <div className='sm:col-span-12 col-span-12'>
              <TextReveal />
          </div>
      
      
-      <div className='sm:col-span-4 col-span-12'>
-        <AniList />
-         </div>
-      
+     
       
       </div>
   )

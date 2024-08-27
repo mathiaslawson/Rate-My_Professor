@@ -8,7 +8,7 @@ export async function TextReveal() {
     <div className="h-full w-full max-w-[32rem] items-center justify-center overflow-hidden pt-8">
       <BoxReveal boxColor={"#cbcbcb"} duration={0.5}>
         <p className="text-[3.5rem] font-semibold">
-          any-Klaus<span className="text-[#1b1a1e]"></span>
+          ProfessorRatings<span className="text-[#1b1a1e]"></span>
         </p>
       </BoxReveal>
 
@@ -47,7 +47,7 @@ export async function TextReveal() {
 
       <BoxReveal boxColor={"#cbcbcb"} duration={0.5}>
         <Link href="/sign-in">
-          <Button className="mt-[1.6rem] bg-[#1f1d39]">Explore any-Klaus</Button>
+          <Button className="mt-[1.6rem] bg-[#1f1d39]">Explore </Button>
         </Link>
       </BoxReveal>
     </div>

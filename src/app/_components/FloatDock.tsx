@@ -9,7 +9,7 @@ export type IconProps = React.HTMLAttributes<SVGElement>;
 export function FloatDock() {
   return (
     <div className="relative">
-      <Dock direction="middle">
+      <Dock direction="middle" className="bg-white">
         <DockIcon>
           <Link href="https://github.com/mathiaslawson/Klaus-Customer-Support">
             <Icons.gitHub className="size-6" />

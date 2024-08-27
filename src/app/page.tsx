@@ -41,7 +41,7 @@ export default async function Home() {
         
         : (
             <main className="flex items-center justify-center min-h-screen">
-      <div className="px-4 py-16 max-w-screen-4xl">
+      <div className="px-4 max-w-screen-4xl">
       <LandingPage />
       </div>
     </main>

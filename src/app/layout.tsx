@@ -25,7 +25,23 @@ export default function RootLayout({
     <ClerkProvider>
        <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <div className="hero p-20">
+                   <div className="hero-text">
+   
+              {children}
+   
+    
+              
+              <div></div>
+  </div>
+  <div className="blob-cont">
+    <div className="yellow blob"></div>
+    <div className="red blob"></div>
+    <div className="green blob"></div>
+  </div>
+          </div>
+          </TRPCReactProvider>
       </body>
     </html>
   </ClerkProvider>
