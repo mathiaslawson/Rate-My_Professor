@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export async function StarButton() {
   return (
-    <Link href="https://github.com/mathiaslawson/Klaus-Customer-Support">
+    <Link href="https://github.com/mathiaslawson/Rate-My_Professor">
     <div className="z-10 flex items-start justify-start mt-4">
       <div
         className={cn(

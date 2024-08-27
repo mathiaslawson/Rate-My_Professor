@@ -3,6 +3,7 @@ import React from "react";
 import { Dock, DockIcon } from "~/components/magicui/dock";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { PlusIcon } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -11,13 +12,19 @@ export function FloatDock() {
     <div className="relative">
       <Dock direction="middle" className="bg-white">
         <DockIcon>
-          <Link href="https://github.com/mathiaslawson/Klaus-Customer-Support">
+          <Link href="https://github.com/mathiaslawson/Rate-My_Professor">
             <Icons.gitHub className="size-6" />
           </Link>
         </DockIcon>
     
         <DockIcon>
           <UserButton />
+        </DockIcon>
+
+          <DockIcon>
+         <Link href="/chat">
+             <PlusIcon />
+          </Link>
         </DockIcon>
       
       </Dock>

@@ -1,9 +1,17 @@
 import React from 'react'
+import Chat from '~/components/RagBot'
+import { FloatDock } from '../_components/FloatDock'
 
-function Chat() {
+function ChatPage() {
   return (
-    <div>Chat</div>
+    <div className='flex flex-col items-center justify-center'>
+      <Chat />
+
+      {/* <div>
+        <FloatDock />
+      </div> */}
+   </div>
   )
 }
 
-export default Chat
+export default ChatPage

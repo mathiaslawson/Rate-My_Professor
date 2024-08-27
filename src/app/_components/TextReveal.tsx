@@ -14,8 +14,15 @@ export async function TextReveal() {
 
       <BoxReveal boxColor={"#cbcbcb"} duration={0.5}>
         <h2 className="mt-[.5rem] text-[1rem]">
-          any-Klaus is a RAG chatbot that is able to provide info{" "}
-          <span className="text-[#5046e6]">Based on infered knowledge base</span>
+          ProfessorRatings is a RAG chatbot that is able to provide info{" "}
+          <span className="text-[#5046e6]">Based on infered knowledge base on professors around the world</span>
+        </h2>
+      </BoxReveal>
+
+       <BoxReveal boxColor={"#cbcbcb"} duration={0.5}>
+        <h2 className="mt-[.5rem] text-[1rem]">
+        Two ways of adding professor ratings to this bot is by either entering a url link were the information to that link is scrapped and used, or you just drop in the professors data{" "}
+          <span className="text-[#5046e6]">or you just drop in the professors data</span>
         </h2>
       </BoxReveal>
 
@@ -32,7 +39,7 @@ export async function TextReveal() {
 
             <br />
           
-            -&gt; Omni channel integration (coming soon).  Since Klaus can consume knowledge from any knowledge domain later versions would be introduced as a support bot for multiple domains (finance, health, etc.)
+           
 
           </p>
         </div>

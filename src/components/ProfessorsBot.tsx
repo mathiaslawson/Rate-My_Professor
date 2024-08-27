@@ -81,7 +81,7 @@ export default function ProfessorBot() {
         <input
           className="relative sm:w-[200rem] w-[50rem] max-w-lg p-3 mb-8 border border-gray-300 rounded-xl shadow-xl mt-6 "
           value={input}
-          placeholder="Enter URL ....."
+          placeholder="Search For Professors ....."
           onChange={handleInputChange}
         />
       </form>
@@ -98,7 +98,8 @@ export default function ProfessorBot() {
            <div className='sm:absolute sm:right-20'>
         <h3 className='text-white text-center mt-10 mb-5'>Search Results</h3>
         
-        <div className='grid gap-4 h-[500px] overflow-y-scroll scroll-m-10'>
+              <ScrollArea className="h-[220px] w-full px-3 py-1 sm:h-[500px] gap-3">
+              
                 {
                   professors.map((professor, index) => (
                     <div key={index} className='bg-neutral-300 sm:w-[600px] py-4 px-4 rounded-xl bg-opacity-10 shadow-transparent border border-neutral-500 text-white frosted h-max mx-2'>
@@ -112,7 +113,7 @@ export default function ProfessorBot() {
                     </div>
                   ))
           }
-         </div>
+         </ScrollArea>
             </div></>) : (<>
                <div className='sm:absolute sm:right-20'>
         <h3 className='text-white text-center mt-10 mb-5'> Results</h3>
